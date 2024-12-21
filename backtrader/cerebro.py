@@ -1561,6 +1561,13 @@ class Cerebro(with_metaclass(MetaParams, object)):
                 else:
                     dt0 = min((d for i, d in enumerate(dts)
                                if d is not None and i not in rsonly))
+                    # FIX: solving the error min() iterable argument is empty in some cases.
+                    # Need further study to understand correctly the issue.
+                    valid_dts = [d for i, d in enumerate(dts)
+                                if d is not None and i not in rsonly]
+                    if not valid_dts:
+                        continue
+                    dt0 = min(valid_dts)
 
                 dmaster = datas[dts.index(dt0)]  # and timemaster
                 self._dtmaster = dmaster.num2date(dt0)
