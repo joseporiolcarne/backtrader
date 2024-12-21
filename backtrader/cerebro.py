@@ -1558,9 +1558,7 @@ class Cerebro(with_metaclass(MetaParams, object)):
                 # Get index to minimum datetime
                 if onlyresample or noresample:
                     dt0 = min((d for d in dts if d is not None))
-                else:
-                    dt0 = min((d for i, d in enumerate(dts)
-                               if d is not None and i not in rsonly))
+                else:                   
                     # FIX: solving the error min() iterable argument is empty in some cases.
                     # Need further study to understand correctly the issue.
                     valid_dts = [d for i, d in enumerate(dts)
